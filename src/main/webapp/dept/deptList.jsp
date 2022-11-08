@@ -3,6 +3,7 @@
 <%@ page import = "java.util.*" %>
 <%@ page import = "vo.*" %>
 <%
+	request.setCharacterEncoding("utf-8");
 	// 1. 요청분석(Controller)
 	
 	// 2. 업무처리(Model) -> 모델데이터(단일값 or 자료구조형태(배열, 리스트, ...))
@@ -34,9 +35,6 @@
 	for(Department d : list){ // 자바문법에서 제공하는 포이치문
 		
 	}
-	
-	
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -75,8 +73,8 @@
 					<tr>
 						<td><%=d.deptNo%></td>
 						<td><%=d.deptName%></td>
-						<td><a href="">수정</a></td>
-						<td><a href="">삭제</a></td>
+						<td><a href="<%=request.getContextPath()%>/dept/updateDeptForm.jsp?deptNo=<%=d.deptNo%>">수정</a></td>
+						<td><a href="<%=request.getContextPath()%>/dept/deleteDept.jsp?deptNo=<%=d.deptNo%>">삭제</a></td>
 					</tr>
 				<%		
 					}
