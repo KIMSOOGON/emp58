@@ -20,10 +20,9 @@
 	System.out.println("수정Action conn완료 : " +conn);
 
 	// 2.1 중복검사
-	String sql1 = "SELECT dept_no, dept_name from departments where dept_no = ? or dept_name = ?";
+	String sql1 = "SELECT dept_name from departments where dept_name = ?";
 	PreparedStatement stmt1 = conn.prepareStatement(sql1);
 	stmt1.setString(1, dept.deptName);
-	stmt1.setString(2, dept.deptNo);
 	ResultSet rs = stmt1.executeQuery();
 	if(rs.next()){
 		String msg = URLEncoder.encode("이미 존재하는 부서번호(or부서이름) 입니다","utf-8");
