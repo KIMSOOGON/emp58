@@ -34,11 +34,16 @@
 	<title>Insert title here</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+	<style>
+		table,th,tr,td{
+			border:1px solid grey;
+		}
+	</style>
 </head>
-<body>
-	<h1>부서명 수정</h1>
+<body style="background-color:rgb(230,245,240)">
+	<h1 class="container mt-3 p-3 text-center bg-light rounded">부서명 수정</h1>
 	<form method="post" action="<%=request.getContextPath()%>/dept/updateDeptAction.jsp">
-		<table>
+		<table class="table table-hover table-bordered text-center" style="background-color:rgb(240,220,210)">
 			<tr>
 				<td>부서번호</td>
 				<td><input type="text" name="deptNo" value="<%=deptNo%>" readonly="readonly"></td>
@@ -48,7 +53,9 @@
 				<td><input type="text" name="deptName" value="<%=deptName%>"></td>
 			</tr>	
 		</table>
-		<button type="submit">Update</button>
+		<div class="text-center">
+			<button type="submit" class="btn btn-outline-primary">Update</button>
+		</div>
 	</form>
 </body>
 </html>

@@ -12,17 +12,21 @@
 	// (1) maria 드라이버 로딩
 	Class.forName("org.mariadb.jdbc.Driver");
 	System.out.println("1. 드라이버 로딩 성공"); // 디버깅
+	
 	// (2) 접속
 	Connection conn = DriverManager.getConnection(
 			"jdbc:mariadb://127.0.0.1:3306/employees","root","java1234");
 	System.out.println("2. conn : "+conn); // 디버깅
+	
 	// (3) 쿼리 생성
 	PreparedStatement stmt = conn.prepareStatement(
 			"select dept_no deptNo,dept_name deptName from departments order by dept_no asc");
 	System.out.println("3. stmt : "+stmt); // 디버깅
+	
 	// (4) 쿼리 실행
 	ResultSet rs = stmt.executeQuery(); // <- 모델데이터 ResultSet은 일반적인 타입이 아니고 독립적인 타입도 아니다
 	// ResultSet rs라는 모델자료구조를 좀더 일반적이고 독립적인 자료구조로 변경을 하자
+	
 	ArrayList<Department> list = new ArrayList<Department>();
 	while(rs.next()){ // ResultSet의 API(사용방법)를 모른다면 사용할 수 없는 반복문
 		Department d = new Department();
@@ -53,8 +57,8 @@
 		}
 	</style>
 </head>
-<body>
-	<h1 class="container text-center pt-5">Departments List</h1>
+<body style="background-color:rgb(247,240,230)">
+	<h1 class="container text-center bg-light">Departments List</h1>
 	<div class="container mt-3 text-center">
 		<!-- 부서목록출력(부서번호 내림차순) -->
 		<table class="table table-bordered">
@@ -73,8 +77,8 @@
 					<tr>
 						<td><%=d.deptNo%></td>
 						<td><%=d.deptName%></td>
-						<td><a href="<%=request.getContextPath()%>/dept/updateDeptForm.jsp?deptNo=<%=d.deptNo%>">수정</a></td>
-						<td><a href="<%=request.getContextPath()%>/dept/deleteDept.jsp?deptNo=<%=d.deptNo%>">삭제</a></td>
+						<td><a class="btn btn-primary btn-sm" href="<%=request.getContextPath()%>/dept/updateDeptForm.jsp?deptNo=<%=d.deptNo%>">수정</a></td>
+						<td><a class="btn btn-danger btn-sm" href="<%=request.getContextPath()%>/dept/deleteDept.jsp?deptNo=<%=d.deptNo%>">삭제</a></td>
 					</tr>
 				<%		
 					}
