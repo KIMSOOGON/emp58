@@ -6,6 +6,7 @@
 	// 1. 요청분석
 	request.setCharacterEncoding("utf-8");
 	String deptNo = request.getParameter("deptNo");
+	String deptName = request.getParameter("deptName");
 	if(deptNo == null){ // deptList의 링크로 호출하지 않고 updateDeptForm.jsp 주소창에 직접 호출하면 deptNo는 null값이 된다.
 		response.sendRedirect(request.getContextPath()+"/dept/deptList.jsp");
 		return;
@@ -22,10 +23,11 @@
 	stmt.setString(1,deptNo);
 	ResultSet rs = stmt.executeQuery();
 	
-	Department dept = null;
+	Department dept = new Department();
+	dept.deptName = deptName;
+	dept.deptNo = deptNo;
 	
 	if(rs.next()){
-		dept = new Department();
 		dept.deptNo = deptNo;
 		dept.deptName = rs.getString("deptName");
 	}
@@ -53,11 +55,11 @@
 	<div>
 			<!-- msg 파라메타값이 있으면 출력 -->
 		<%
-			if(request.getParameter("msg") != null){
+			  if(request.getParameter("msg") != null){
 		%>
 				<div class="text-center" style="color:red"><%=request.getParameter("msg")%></div>		
 		<%		
-			}
+			  }
 		%>
 	</div>
 	<h1 class="container mt-3 p-3 text-center bg-light rounded">부서명 수정</h1>

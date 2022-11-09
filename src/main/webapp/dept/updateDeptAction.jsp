@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page import = "java.util.*"%>
 <%@ page import = "vo.*" %>
-<%@ page import = "java.net.URLEncoder" %>
+<%@ page import = "java.net.URLEncoder"%>
 <%
 	// 1. 요청분석
 	request.setCharacterEncoding("utf-8");
@@ -13,6 +13,12 @@
 	dept.deptNo = deptNo;
 	dept.deptName = deptName;
 	
+	if(dept.deptNo == null || dept.deptName == null ||
+      dept.deptNo.equals("") || dept.deptName.equals("")) {     
+      response.sendRedirect(request.getContextPath()+"/dept/updateDeptForm.jsp");
+      return;
+		   }
+	
 	// 2. 요청처리
 	Class.forName("org.mariadb.jdbc.Driver");
 	System.out.println("수정Action 드라이버로딩완료");
@@ -20,15 +26,17 @@
 	System.out.println("수정Action conn완료 : " +conn);
 
 	// 2.1 중복검사
-	String sql1 = "SELECT dept_name from departments where dept_name = ?";
+	String sql1 = "SELECT dept_no, dept_name from departments where dept_no = ? OR dept_name = ?";
 	PreparedStatement stmt1 = conn.prepareStatement(sql1);
-	stmt1.setString(1, dept.deptName);
+	stmt1.setString(1, dept.deptNo);
+	stmt1.setString(2, dept.deptName);
+
 	ResultSet rs = stmt1.executeQuery();
 	if(rs.next()){
 		String msg = URLEncoder.encode("이미 존재하는 부서번호(or부서이름) 입니다","utf-8");
 		System.out.println(msg);
-		response.sendRedirect(request.getContextPath()+"/dept/updateDeptForm.jsp?msg="+msg);
-		return;
+		response.sendRedirect(request.getContextPath()+"/dept/updateDeptForm.jsp?msg="+msg+"&deptNo="+dept.deptNo+"&deptName="+dept.deptName);
+		return;		
 	}
 	
 	// 2.2 입력
