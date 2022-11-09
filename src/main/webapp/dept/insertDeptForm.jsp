@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>insertDeptForm</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 	<style>
@@ -15,6 +15,10 @@
 	</style>
 </head>
 <body style="background-color:rgb(246,243,230)">
+	<!-- 메뉴 partial jsp 구성 -->
+	<div>
+		<jsp:include page="../inc/menu.jsp"></jsp:include>
+	</div>
 	<h2 class="container mt-3 p-3 text-center bg-light rounded">부서 추가</h2>
 	<form action="<%=request.getContextPath()%>/dept/insertDeptAction.jsp">
 		<br>

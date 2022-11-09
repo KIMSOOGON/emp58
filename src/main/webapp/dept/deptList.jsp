@@ -44,7 +44,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>DeptList</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 	
@@ -58,6 +58,10 @@
 	</style>
 </head>
 <body style="background-color:rgb(247,240,230)">
+	<!-- 메뉴 partial jsp 구성 -->
+	<div>
+		<jsp:include page="../inc/menu.jsp"></jsp:include>
+	</div>
 	<h1 class="container text-center bg-light">Departments List</h1>
 	<div class="container mt-3 text-center">
 		<!-- 부서목록출력(부서번호 내림차순) -->
