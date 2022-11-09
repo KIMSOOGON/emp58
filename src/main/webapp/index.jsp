@@ -13,10 +13,14 @@
 		}
 	</style>
 </head>
-<body style="background-color:rgb(230,245,235)">
-	<h1 class="container text-center" id="head">INDEX</h1>
+<body style="background-color:rgb(20,20,25)">
+	<h1 class="container mt-3 p-3 text-center text-light" id="head">INDEX</h1>
 	<ol class="text-center">
 		<li><a class="btn btn-outline-warning" href="<%=request.getContextPath()%>/dept/deptList.jsp">부서 관리</a></li>
+		<br>
+		<li><a class="btn btn-outline-warning" href="<%=request.getContextPath()%>/emp/empList.jsp">사원 관리</a></li>
+		<br>
+		<li><a class="btn btn-outline-warning" href="<%=request.getContextPath()%>/dept/deptList.jsp">급여 관리</a></li>
 	</ol>
 </body>
 </html>

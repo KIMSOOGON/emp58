@@ -50,6 +50,16 @@
 	<div>
 		<jsp:include page="../inc/menu.jsp"></jsp:include>
 	</div>
+	<div>
+			<!-- msg 파라메타값이 있으면 출력 -->
+		<%
+			if(request.getParameter("msg") != null){
+		%>
+				<div class="text-center" style="color:red"><%=request.getParameter("msg")%></div>		
+		<%		
+			}
+		%>
+	</div>
 	<h1 class="container mt-3 p-3 text-center bg-light rounded">부서명 수정</h1>
 	<form method="post" action="<%=request.getContextPath()%>/dept/updateDeptAction.jsp">
 		<table class="table table-hover table-bordered text-center" style="background-color:rgb(240,220,210)">

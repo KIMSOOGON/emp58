@@ -20,6 +20,14 @@
 		<jsp:include page="../inc/menu.jsp"></jsp:include>
 	</div>
 	<h2 class="container mt-3 p-3 text-center bg-light rounded">부서 추가</h2>
+	<!-- msg 파라메타값이 있으면 출력 -->
+	<%
+		if(request.getParameter("msg") != null){
+	%>
+			<div class="text-center" style="color:red"><%=request.getParameter("msg")%></div>		
+	<%		
+		}
+	%>
 	<form action="<%=request.getContextPath()%>/dept/insertDeptAction.jsp">
 		<br>
 		<table class="table table-hover table-bordered text-center" style="background-color:rgb(215,235,225)">

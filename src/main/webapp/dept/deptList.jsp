@@ -54,6 +54,7 @@
 			width: 10%;
 			height: 50px;
 			margin: auto;
+			background-color:rgb(245,240,235)
 		}
 	</style>
 </head>
