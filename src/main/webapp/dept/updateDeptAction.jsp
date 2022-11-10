@@ -26,10 +26,10 @@
 	System.out.println("수정Action conn완료 : " +conn);
 
 	// 2.1 중복검사
-	String sql1 = "SELECT dept_no, dept_name from departments where dept_no = ? OR dept_name = ?";
+	String sql1 = "SELECT dept_name from departments where dept_name = ?";
 	PreparedStatement stmt1 = conn.prepareStatement(sql1);
-	stmt1.setString(1, dept.deptNo);
-	stmt1.setString(2, dept.deptName);
+	stmt1.setString(1, dept.deptName);
+
 
 	ResultSet rs = stmt1.executeQuery();
 	if(rs.next()){

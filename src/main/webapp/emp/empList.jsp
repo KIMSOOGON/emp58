@@ -17,7 +17,7 @@
 	Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
 	// lastPage 처리
 	String countSql = "SELECT COUNT(*) FROM employees";
-	PreparedStatement countStmt = conn.prepareStatement(countSql);
+	PreparedStatement countStmt = conn.prepareStatement(countSql); 
 	ResultSet countRs = countStmt.executeQuery();
 	int count = 0;
 	if(countRs.next()){
@@ -48,19 +48,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style="background-color:rgb(247,240,230)">
 	<!-- 메뉴 partial jsp 구성 -->
 	<div>
 		<jsp:include page="../inc/menu.jsp"></jsp:include>
 	</div>
 	
-	<h1>사원목록</h1>
-	
-	<div>현재 페이지 : <%=currentPage%></div>
-	<table border="1">
+	<div class="container rounded bg-light">
+	<h1 class="container mt-3 p-3 text-center bg-dark text-warning">사원목록</h1>
+	<div><mark class="text-primary">현재 페이지 : <%=currentPage%></mark></div>
+	<table class="table table-border table-hover">
 		<tr>
 			<th>사원번호</th>
 			<th>FirstName</th>
@@ -95,6 +97,7 @@
 			}
 		%>
 		<a href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=lastPage%>">마지막페이지</a>
+	</div>
 	</div>
 </body>
 </html>
