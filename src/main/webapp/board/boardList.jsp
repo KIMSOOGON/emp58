@@ -61,7 +61,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 	
 	<style>
-		a:link, a:active{
+		a:link, a:active, a:visited{
 			color:black;
 			text-decoration:none;
 		}
@@ -107,24 +107,24 @@
 	</div>
 	<br>
 	<!-- 3-2. 페이징 -->
-	<div class="container btn-group text-center">
-		<a class="btn btn-dark btn-sm" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=1">첫페이지</a>
+	<div class="container mt-2 p-2 btn-group text-center">
+		<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=1">첫페이지</a>
 		<%
 			if(currentPage>1){
 		%>
-				<a class="btn btn-dark" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+				<a class="btn btn-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage-1%>">이전</a>
 		<%
 			}
 		%>
-		<span class="btn btn-dark btn-sm"><%=currentPage%></span>
+		<span class="btn btn-light btn-sm"><%=currentPage%></span>
 		<%
 			if(currentPage<lastPage){
 		%>
-				<a class="btn btn-dark btn-sm" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+				<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage+1%>">다음</a>
 		<%
 			}
 		%>
-		<a class="btn btn-dark btn-sm" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=lastPage%>">마지막페이지</a>
+		<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=lastPage%>">마지막페이지</a>
 	</div>
 </body>
 </html>

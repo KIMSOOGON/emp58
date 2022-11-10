@@ -20,7 +20,7 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea name="boardContent" row="20" cols="50" style="height:300px; width:80%"></textarea></td>
+					<td><textarea name="boardContent" rows="20" cols="50" style="height:300px; width:80%"></textarea></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
@@ -31,7 +31,7 @@
 					<td><input type="password" name="boardPw"></td>
 				</tr>
 				<tr>
-					<td cols="2">
+					<td colspan="2">
 						<button type="submit">등록</button>
 					</td>
 				</tr>
