@@ -31,6 +31,16 @@
 		return;
 	}
 	
+	/*
+	int row = 0;
+	if(row == 1){
+		response.sendRedirect(request.getContextPath()+"/board/boardList.jsp");
+	} else {
+		String msg = URLEncoder.encode("비밀번호를 확인하세요", "utf-8")
+		response.sendRedirect(request.getContextPath()+"/board/deleteBoardForm.jsp?msg="+msg);
+	}
+	*/
+	
 	// 2.2 삭제 쿼리
 	String sql = "delete from board where board_no = ? AND board_pw = ?";
 	System.out.println("3) deleteBoard sql : "+sql);
@@ -40,7 +50,12 @@
 	stmt.setString(1,boardNo);
 	stmt.setString(2,boardPw);
 	
-	stmt.executeUpdate();
+	int row = stmt.executeUpdate();
+	if(row == 1){
+		System.out.println("삭제완료");
+	} else {
+		System.out.println("삭제실패");
+	}
 	/*
 	int row = stmt.executeUpdate();
 	if(row==1){

@@ -73,58 +73,90 @@
 		<jsp:include page="../inc/menu.jsp"></jsp:include>
 	</div>
 	
-	<h1 style="background-color:rgb(200,200,200)" class="container mt-2 p-2 text-center rounded">자유 게시판</h1>
-	
-	<!-- 3-1. 모델데이터(ArrayList<Board>) 출력 -->
-	<table class="container rounded table table-hover table-striped text-center">
-		<tr style="background-color:pink">
-			<th>No</th>
-			<th>제목</th>
-			<th>작성자</th>
-		</tr>
+	<div class="container rounded bg-light">
+		<h1 class="container mt-3 p-3 text-center bg-dark text-warning rounded">자유 게시판</h1>
 		
-		<%
-			for(Board b : boardList){
-		%>
-				<tr>
-					<td><%=b.boardNo%></td>
-					<!-- 제목 클릭시 상세보기 이동 -->
-					<td>
-						<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=b.boardNo%>">
-							<%=b.boardTitle%>
-						</a>
-					</td>
-					<td><%=b.boardWriter%></td>
-				</tr>
-		<%
-			}
-		%>
-	</table>
-	
-	<!-- 게시판 등록 -->
-	<div style="text-align:center">
-		<a class="btn btn-outline-success" href="<%=request.getContextPath()%>/board/insertBoardForm.jsp">글쓰기</a>
-	</div>
-	<br>
-	<!-- 3-2. 페이징 -->
-	<div class="container mt-2 p-2 btn-group text-center">
-		<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=1">첫페이지</a>
-		<%
-			if(currentPage>1){
-		%>
-				<a class="btn btn-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-		<%
-			}
-		%>
-		<span class="btn btn-light btn-sm"><%=currentPage%></span>
-		<%
-			if(currentPage<lastPage){
-		%>
-				<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage+1%>">다음</a>
-		<%
-			}
-		%>
-		<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=lastPage%>">마지막페이지</a>
+		<!-- 3-1. 모델데이터(ArrayList<Board>) 출력 -->
+		<table class="container rounded table table-hover table-striped text-center">
+			<tr style="background-color:pink">
+				<th>No</th>
+				<th>제목</th>
+				<th>작성자</th>
+			</tr>
+			
+			<%
+				for(Board b : boardList){
+			%>
+					<tr>
+						<td><%=b.boardNo%></td>
+						<!-- 제목 클릭시 상세보기 이동 -->
+						<td>
+							<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=b.boardNo%>">
+								<%=b.boardTitle%>
+							</a>
+						</td>
+						<td><%=b.boardWriter%></td>
+					</tr>
+			<%
+				}
+			%>
+		</table>
+		<!-- 게시판 등록 -->
+		<div style="text-align:center">
+			<a class="btn btn-outline-success text-success" href="<%=request.getContextPath()%>/board/insertBoardForm.jsp">글쓰기</a>
+		</div>
+		<br>
+		
+		<!-- 3-2. 페이징 -->
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=1">첫페이지</a></li>
+			<%
+				if(currentPage>1){
+			%>
+					<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage-1%>">이전</a></li>
+			<%
+				}
+				if(currentPage-2>1){
+			%>
+					<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage-3%>"><%=currentPage-3%></a></li>
+			<%
+				}
+				if(currentPage-1>1){
+			%>
+					<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage-2%>"><%=currentPage-2%></a></li>
+			<%
+				}
+				if(currentPage>1){
+			%>
+					<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage-1%>"><%=currentPage-1%></a></li>
+			<%
+				}
+			%>
+				<li class="page-item"><span class="page-link text-warning bg-dark"><%=currentPage%></span></li>
+			<%
+				if(currentPage<lastPage){
+			%>
+					<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage+1%>"><%=currentPage+1%></a></li>
+			<%
+				}
+				if(currentPage+1<lastPage){
+			%>
+					<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage+2%>"><%=currentPage+2%></a></li>
+			<%
+				}
+				if(currentPage+2<lastPage){
+			%>
+					<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage+3%>"><%=currentPage+3%></a></li>
+			<%
+				}
+				if(currentPage<lastPage){
+			%>
+					<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage+1%>">다음</a></li>
+			<%
+				}
+			%>
+			<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=lastPage%>">마지막페이지</a></li>
+		</ul>	
 	</div>
 </body>
 </html>

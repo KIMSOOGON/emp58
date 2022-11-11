@@ -19,12 +19,13 @@
 	b.boardContent = boardContent;
 	b.boardWriter = boardWriter;
 	
+	System.out.println("수정액션 불러오기 완료");
 	if(b.boardTitle==null || b.boardPw == null || b.boardContent==null || b.boardWriter==null
-		|| b.boardTitle=="" || b.boardPw =="" || b.boardContent=="" || b.boardWriter==""){     
-      response.sendRedirect(request.getContextPath()+"/board/updateBoardForm.jsp");
+		|| b.boardTitle.equals("") || b.boardPw.equals("") || b.boardContent.equals("") || b.boardWriter.equals("")){     
+      System.out.println("pw 공백");
+	  response.sendRedirect(request.getContextPath()+"/board/updateBoardForm.jsp?boardNo="+b.boardNo+"&boardTitle="+b.boardTitle+"&boardContent="+b.boardContent+"&boardWriter="+b.boardWriter);
       return;
    	}
-	
 	
 	// 2. 업무처리
 	Class.forName("org.mariadb.jdbc.Driver");
@@ -45,9 +46,9 @@
 		response.sendRedirect(request.getContextPath()+"/board/updateBoardForm.jsp?msg="
 		+msg+"&boardNo="+b.boardNo+"&boardTitle="+b.boardTitle);
 		return;
+	} else {
+		System.out.println("비밀번호가 일치합니다");
 	}
-	System.out.println("비밀번호가 일치합니다");
-	
 	// 2.2 수정
 	String sql = "UPDATE board set board_title=?, board_content=? WHERE board_no = ? AND board_pw = ?";
 	PreparedStatement stmt = conn.prepareStatement(sql);

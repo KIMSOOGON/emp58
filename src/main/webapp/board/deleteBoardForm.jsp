@@ -13,7 +13,7 @@
 </head>
 <body style="background-color:rgb(200,200,205)">
 	<div class="container mt-4 p-4 bg-light text-center">
-		<h2 class="container mt-3 p-3 bg-dark text-warning">패스워드를 입력하시오</h2>
+		<h2 class="container mt-3 p-3 bg-dark text-warning">※삭제하시겠습니까?※</h2>
 		<form method="post" action="<%=request.getContextPath()%>/board/deleteBoardAction.jsp">
 			<div>
 				<!-- msg 파라메타값이 있으면 출력 -->
@@ -28,8 +28,8 @@
 			
 			<table class="table talbe-hover">
 				<tr>
-					<td><mark>No</mark></td>
-					<td><input type="text" name="boardNo" value="<%=boardNo%>" readonly="readonly"></td>
+					<!-- <td><mark>No</mark></td> -->
+					<td colspan="2"><input type="hidden" name="boardNo" value="<%=boardNo%>" readonly="readonly"></td>
 				</tr>
 				<tr>
 					<td><mark>Password</mark></td>
@@ -37,7 +37,7 @@
 				</tr>
 				<tr class="text-center">
 					<td colspan="2">
-						<button class="btn btn-warning text-center" type="submit">확인</button>
+						<button class="btn btn-warning text-center" type="submit">YES</button>
 					</td>
 				</tr>
 			</table>

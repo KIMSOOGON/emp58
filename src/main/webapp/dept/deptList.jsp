@@ -50,11 +50,9 @@
 	
 	<style>
 		table, td, th, tr {
-			border: 1px solid pink;
 			width: 10%;
 			height: 50px;
-			margin: auto;
-			background-color:rgb(245,240,235)
+			margin: auto;	
 		}
 	</style>
 </head>
@@ -63,10 +61,11 @@
 	<div>
 		<jsp:include page="../inc/menu.jsp"></jsp:include>
 	</div>
-	<h1 class="container text-center bg-light">Departments List</h1>
-	<div class="container mt-3 text-center">
+	
+	<div class="container rounded bg-light">
+	<h1 class="container mt-3 p-3 text-center bg-dark text-warning rounded">Departments List</h1>
 		<!-- 부서목록출력(부서번호 내림차순) -->
-		<table class="table table-bordered">
+		<table class="table table-hover text-center bg-light">
 			<thead>
 				<tr>
 					<th><mark>부서번호</mark></th>
@@ -90,9 +89,10 @@
 				%>
 			</tbody>
 		</table>
-	</div>
-	<div class="container text-end">
-		<a class="btn btn-outline-success btn-sm" href="<%=request.getContextPath()%>/dept/insertDeptForm.jsp">부서 추가</a>
+
+		<div class="container text-end">
+			<a class="btn btn-outline-success btn-sm" href="<%=request.getContextPath()%>/dept/insertDeptForm.jsp">부서 추가</a>
+		</div>
 	</div>
 </body>
 </html>

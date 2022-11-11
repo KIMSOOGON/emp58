@@ -60,13 +60,13 @@
 	</div>
 	
 	<div class="container rounded bg-light">
-	<h1 class="container mt-3 p-3 text-center bg-dark text-warning">사원목록</h1>
-	<div><mark class="text-primary">현재 페이지 : <%=currentPage%></mark></div>
-	<table class="table table-border table-hover">
+	<h1 class="container mt-3 p-3 text-center bg-dark text-warning rounded">사원목록</h1>
+	
+	<table class="table table-hover text-center">
 		<tr>
-			<th>사원번호</th>
-			<th>FirstName</th>
-			<th>LastName</th>
+			<th><mark>사원번호</mark></th>
+			<th><mark>FirstName</mark></th>
+			<th><mark>LastName</mark></th>
 		</tr>
 		<%
 			for(Employee e : empList){
@@ -81,23 +81,46 @@
 		%>
 	</table>
 	<!-- 페이징 코드 -->
-	<div>
-		<a href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=1">첫페이지</a>
+	<ul class="pagination justify-content-center">
+		<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=1">첫페이지</a></li>
 		<%
 			if(currentPage > 1){
 		%>
-				<a href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage-1%>">이전</a></li>
 		<%
 			}
 		
-			if(currentPage < lastPage){
+			if(currentPage-1>1){
 		%>
-				<a href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage-2%>"><%=currentPage-2%></a></li>
+		<%
+			}
+			if(currentPage>1){
+		%>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage-1%>"><%=currentPage-1%></a></li>
 		<%
 			}
 		%>
-		<a href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=lastPage%>">마지막페이지</a>
-	</div>
+			<li class="page-item"><span class="page-link text-warning bg-dark"><%=currentPage%></span></li>
+		<%
+			if(currentPage<lastPage){
+		%>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage+1%>"><%=currentPage+1%></a></li>
+		<%
+			}
+			if(currentPage+1<lastPage){
+		%>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage+2%>"><%=currentPage+2%></a></li>
+		<%
+			}
+			if(currentPage < lastPage){
+		%>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage+1%>">다음</a></li>
+		<%
+			}
+		%>
+			<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=lastPage%>">마지막페이지</a></li>
+	</ul>
 	</div>
 </body>
 </html>
