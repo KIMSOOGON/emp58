@@ -89,7 +89,16 @@
 				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage-1%>">이전</a></li>
 		<%
 			}
-		
+			if((currentPage>lastPage-1)&&(currentPage-3>1)){
+		%>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage-2%>"><%=currentPage-2%></a></li>
+		<%
+			}
+			if((currentPage>lastPage-2)&&(currentPage-2>1)){
+		%>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage-2%>"><%=currentPage-2%></a></li>
+		<%
+			}
 			if(currentPage-1>1){
 		%>
 				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage-2%>"><%=currentPage-2%></a></li>
@@ -100,7 +109,7 @@
 				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage-1%>"><%=currentPage-1%></a></li>
 		<%
 			}
-		%>
+		%>	<!-- 현재페이지 -->
 			<li class="page-item"><span class="page-link text-warning bg-dark"><%=currentPage%></span></li>
 		<%
 			if(currentPage<lastPage){
@@ -111,6 +120,16 @@
 			if(currentPage+1<lastPage){
 		%>
 				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage+2%>"><%=currentPage+2%></a></li>
+		<%
+			}
+			if(currentPage<3&&currentPage+2<lastPage){
+		%>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage+3%>"><%=currentPage+3%></a></li>
+		<%
+			}
+			if(currentPage<2&&currentPage+3<lastPage){
+		%>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/emp/empList.jsp?currentPage=<%=currentPage+4%>"><%=currentPage+4%></a></li>
 		<%
 			}
 			if(currentPage < lastPage){

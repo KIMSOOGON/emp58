@@ -6,6 +6,11 @@
 	//1
 	request.setCharacterEncoding("utf-8"); // 한글 인코딩
 	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+	// 댓글 페이징에 사용할 현재 페이지
+	int currentPage = 1;
+	if(request.getParameter("currentPage") != null){
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
 
 	// 2.
 	Class.forName("org.mariadb.jdbc.Driver");
@@ -30,10 +35,14 @@
 	// 댓글도 페이징 필요 (LIMIT ?,?)
 	
 	// 2-2 댓글 목록 데이터 쿼리
+	int rowPerPage = 5;
+	int beginRow = (currentPage-1)*rowPerPage;
 	
-	String commentSql = "SELECT comment_no commentNo, comment_content commentContent FROM comment WHERE board_no = ? ORDER BY comment_no DESC";
+	String commentSql = "SELECT comment_no commentNo, comment_content commentContent FROM comment WHERE board_no = ? ORDER BY comment_no DESC LIMIT ?,?";
 	PreparedStatement commentStmt = conn.prepareStatement(commentSql);
 	commentStmt.setInt(1, boardNo);
+	commentStmt.setInt(2, beginRow);
+	commentStmt.setInt(3, rowPerPage);
 	ResultSet commentRs = commentStmt.executeQuery();
 	ArrayList<Comment> commentList = new ArrayList<Comment>();
 	while(commentRs.next()){ 
@@ -43,11 +52,19 @@
 		commentList.add(c);
 	}
 	
-	// 2-3 댓글목록 페이징
-	final int ROW_PER_PAGE = 10;
-	
-	// 3
-	
+	// 2-3 댓글 전체행의 수 -> lastPage
+	String cntSql = "SELECT COUNT(*) FROM comment";
+	PreparedStatement cntStmt = conn.prepareStatement(cntSql);
+	ResultSet cntRs = cntStmt.executeQuery();
+	int cnt = 0;
+	if(cntRs.next()){
+		cnt = cntRs.getInt("COUNT(*)");
+	}
+	int lastPage = cnt / rowPerPage;
+	if(cnt % rowPerPage != 0){
+		lastPage = lastPage + 1;
+	}
+	// 3 출력
 %>
 <!DOCTYPE html>
 <html>
@@ -132,22 +149,84 @@
 			<tr>
 				<th>No</th>
 				<th style="width:700px">Comment</th>
-				<th>수정</th>
-				<th>삭제</th>
+				<th>Edit</th>
+				<th>Delete</th>
 			</tr>
 		<%
 			for(Comment c : commentList) {
+				if(c.commentContent != null){
 		%>
-				<tr>
-					<td><%=c.commentNo%></td>
-					<td style="width:700px"><%=c.commentContent%></td>
-					<td><a class="btn btn-outline-secondary btn-sm" href="">수정</a></td>
-					<td><a class="btn btn-outline-secondary btn-sm" href="">삭제</a></td>
-				</tr>
-		<%		
+					<tr>
+						<td><%=c.commentNo%></td>
+						<td style="width:700px"><%=c.commentContent%></td>
+						<td><a class="btn btn-outline-secondary btn-sm" href="<%=request.getContextPath()%>/board/updateCommentForm.jsp?commentNo=<%=c.commentNo%>&boardNo=<%=boardNo%>">수정</a></td>
+						<td><a class="btn btn-outline-secondary btn-sm" href="<%=request.getContextPath()%>/board/deleteCommentForm.jsp?commentNo=<%=c.commentNo%>&boardNo=<%=boardNo%>">삭제</a></td>
+					</tr>
+		<%
+				} 	
 			}
 		%>
 		</table>
+		<!-- 댓글 페이징 -->
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=1">첫페이지</a></li>
+				<%
+					if(currentPage > 1){
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage-1%>">이전</a></li>
+				<%
+					}
+					if((currentPage>lastPage-1)&&(currentPage-3>1)){
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage-2%>"><%=currentPage-2%></a></li>
+				<%
+					}
+					if((currentPage>lastPage-2)&&(currentPage-2>1)){
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage-2%>"><%=currentPage-2%></a></li>
+				<%
+					}
+					if(currentPage-1>1){
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage-2%>"><%=currentPage-2%></a></li>
+				<%
+					}
+					if(currentPage>1){
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage-1%>"><%=currentPage-1%></a></li>
+				<%
+					}	
+				%>	<!-- 현재페이지 -->
+					<li class="page-item"><span class="page-link text-warning bg-dark"><%=currentPage%></span></li>
+				<%
+					if(currentPage<lastPage){
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage+1%>"><%=currentPage+1%></a></li>
+				<%
+					}
+					if(currentPage+1<lastPage){
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage+2%>"><%=currentPage+2%></a></li>
+				<%
+					}
+					if(currentPage<3&&currentPage+2<lastPage){
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage+3%>"><%=currentPage+3%></a></li>
+				<%
+					}
+					if(currentPage<2&&currentPage+3<lastPage){
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage+4%>"><%=currentPage+4%></a></li>
+				<%
+					}
+					if(currentPage < lastPage) {
+				%>
+						<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage+1%>">다음</a></li>
+				<%
+					}
+				%>
+				<li class="page-item"><a class="page-link bg-secondary text-light" href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=lastPage%>">마지막페이지</a></li>
+			</ul>
 	</div>
 </body>
 </html>

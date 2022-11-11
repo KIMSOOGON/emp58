@@ -63,7 +63,7 @@
 	</div>
 	
 	<div class="container mt-4 p-4 bg-light text-center">
-		<h2 class="container mt-3 p-3 bg-dark text-warning">게시글 수정</h2>
+		<h2 class="container rounded mt-3 p-3 bg-dark text-warning">게시글 수정</h2>
 		<form method="post" action="<%=request.getContextPath()%>/board/updateBoardAction.jsp">
 			<table class="table talbe-hover">
 				<tr>	

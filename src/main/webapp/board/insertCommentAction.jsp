@@ -4,7 +4,6 @@
 <%@ page import="java.net.URLEncoder"%>
 <%
 	// 1. 요청분석
-	
 	request.setCharacterEncoding("utf-8"); // 한글 인코딩
 	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 	String commentContent = request.getParameter("commentContent");
