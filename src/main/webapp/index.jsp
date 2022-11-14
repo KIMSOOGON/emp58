@@ -21,6 +21,8 @@
 		<li><a class="btn btn-outline-warning" href="<%=request.getContextPath()%>/emp/empList.jsp">사원 관리</a></li>
 		<br>
 		<li><a class="btn btn-outline-warning" href="<%=request.getContextPath()%>/board/boardList.jsp">게시판 관리</a></li>
+		<br>
+		<li><a class="btn btn-outline-warning" href="<%=request.getContextPath()%>/salary/salaryList1.jsp">급여 관리</a></li>
 	</ol>
 </body>
 </html>
