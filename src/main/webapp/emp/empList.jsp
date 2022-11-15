@@ -94,7 +94,7 @@
 	<div class="container mt-2 p-2">
 		<form method="post" action="<%=request.getContextPath()%>/emp/empList.jsp">
 			<label for="word">사원 찾기 : </label>
-			<input class="rounded" type="text" name="word" 
+			<input class="rounded" type="text" name="word" style="background-color:rgb(255,237,236)" 
 					<%
 						if(word != null){
 					%>
@@ -107,7 +107,7 @@
 						}
 					%> 
 						id="word">
-			<button class="btn btn-outline-dark btn-sm" type="submit">검색</button>
+			<button style="background-color:pink" class="btn btn-outline-dark btn-sm" type="submit">검색</button>
 		</form>
 	</div>
 	<%
@@ -120,10 +120,10 @@
 		}
 	%>
 	<table class="table table-hover text-center">
-		<tr>
-			<th><mark>사원번호</mark></th>
-			<th><mark>FirstName</mark></th>
-			<th><mark>LastName</mark></th>
+		<tr style="background-color:pink">
+			<th>사원번호</th>
+			<th>FirstName</th>
+			<th>LastName</th>
 		</tr>
 		<%
 			for(Employee e : empList){

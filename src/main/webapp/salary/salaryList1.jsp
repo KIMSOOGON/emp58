@@ -112,7 +112,7 @@
 		<div class="container mt-2 p-2">
 			<form method="post" action="<%=request.getContextPath()%>/salary/salaryList1.jsp">
 				<label for="word" class="text-primary">사원 찾기 : </label>
-				<input class="rounded" type="text" name="word" 
+				<input class="rounded" type="text" name="word" style="background-color:rgb(255,237,236)"
 						<%
 							if(word != null){
 						%>
@@ -125,7 +125,7 @@
 							}
 						%> 
 							id="word">
-				<button class="btn btn-outline-dark btn-sm" type="submit">검색</button>
+				<button style="background-color:pink" class="btn btn-outline-dark btn-sm" type="submit">검색</button>
 			</form>
 		</div>
 		<%

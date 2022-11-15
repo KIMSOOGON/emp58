@@ -67,11 +67,11 @@
 		<!-- 부서목록출력(부서번호 내림차순) -->
 		<table class="table table-hover text-center bg-light">
 			<thead>
-				<tr>
-					<th><mark>부서번호</mark></th>
-					<th><mark>부서이름</mark></th>
-					<th><mark>수정</mark></th>
-					<th><mark>삭제</mark></th>
+				<tr style="background-color:pink">
+					<th>부서번호</th>
+					<th>부서이름</th>
+					<th>수정</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
