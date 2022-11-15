@@ -77,6 +77,18 @@
 		de.toDate = rs.getString("toDate");
 		deptEmpList.add(de);
 	}
+	
+	// 부서목록 정렬 쿼리
+	String deptSql = "SELECT dept_no deptNo, dept_name deptName FROM departments ORDER BY dept_no ASC";
+	PreparedStatement deptStmt = conn.prepareStatement(deptSql);
+	ResultSet deptRs = deptStmt.executeQuery();
+	ArrayList<Department> list = new ArrayList<Department>();
+	while(deptRs.next()){
+		Department d = new Department();
+		d.deptNo = deptRs.getString("deptNo");
+		d.deptName = deptRs.getString("deptName");
+		list.add(d);
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -98,8 +110,19 @@
 		<!-- 부서별 정렬하기 -->
 		<div>
 			<form method="post" action="<%=request.getContextPath()%>/deptEmp/deptEmpList.jsp">
-				<label for="word">부서 검색 : </label>
-				<input class="rounded" type="text" name="word"
+				<label for="word">부서 선택 : </label>
+				<select class="container rounded" name="word" value="<%=word%>" style="width:150px; background-color:rgb(255,237,236)">
+					<option>=부서목록=</option>
+					<%
+						for(Department d : list){
+					%>
+							<option><%=d.deptNo%> | <%=d.deptName%></option>
+					<%
+						}
+					%>
+				</select>
+				<!-- 
+				<input class="rounded" type="text"
 						<%
 							if(word != null){
 						%>
@@ -112,19 +135,20 @@
 							}
 						%> 
 							id="word">
-				<button class="btn btn-outline-primary btn-sm" type="submit">검색</button>
+				 -->
+				<button style="background-color:pink" class="btn btn-sm btn-outline-body" type="submit">보기</button>
 			</form>
 		</div>
 		<%
 			if(word != null){
 		%>
 				<div>
-					<span class="text-primary">'<%=word%>'</span> 검색 결과, 총 <span class="text-primary"><%=cnt%>건</span>이 검색되었습니다.
+					<span class="text-primary">'<%=word%>'</span> 부서 소속, 총 <span class="text-primary"><%=cnt%>명</span>의 사원 명단입니다.
 				</div>
 		<%
 			}
 		%>
-		<table class="table table-hover text-center">
+		<table class="table table-hover text-center mt-3 p-3">
 			<tr style="background-color:pink">
 				<th>부서번호</th>
 				<th>부서명</th>
