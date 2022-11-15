@@ -15,7 +15,6 @@
 	}
 	// 2
 	int rowPerPage = 15;
-	int beginRow = 0;
 	
 	Class.forName("org.mariadb.jdbc.Driver");
 	Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");

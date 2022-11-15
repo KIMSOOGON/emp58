@@ -8,4 +8,5 @@
 	<a class="btn btn-dark text-light" href="<%=request.getContextPath()%>/emp/empList.jsp">사원관리</a>
 	<a class="btn btn-dark text-light" href="<%=request.getContextPath()%>/board/boardList.jsp">게시판관리</a>
 	<a class="btn btn-dark text-light" href="<%=request.getContextPath()%>/salary/salaryList1.jsp">급여관리</a>
+	<a class="btn btn-dark text-light" href="<%=request.getContextPath()%>/deptEmp/deptEmpList.jsp">부서별 사원목록</a>
 </div>
